@@ -5,16 +5,14 @@ from ..employees.models import Employee
 
 class Tasks(models.Model):
     """ Модель задач"""
-    
     STATUS_CHOICE = [
-
         ('inactive', 'Не активна'),
         ('active', 'В работе'),
         ('complete', 'Выполнена')
     ]
     title = models.CharField(max_length=100, verbose_name="Наименование")
     parent_task = models.ForeignKey("self", on_delete=models.SET_NULL, null=True,
-                                      blank=True, verbose_name="Родительская задача",
+                                    blank=True, verbose_name="Родительская задача",
                                     related_name='subtasks')
     assignee = models.ForeignKey(Employee, on_delete=models.SET_NULL,
                                  null=True, verbose_name="Исполнитель")

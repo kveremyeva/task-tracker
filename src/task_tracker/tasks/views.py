@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.decorators import action, api_view
 from rest_framework.filters import OrderingFilter
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -28,7 +27,7 @@ class TasksViewSet(viewsets.ModelViewSet):
         if filter_params.get("important_tasks") == "true":
             # Запрос для поиска важных задач
             queryset = Tasks.objects.filter(status='inactive', id__in=Tasks.objects.filter(
-                    parent_task__isnull=False,status='active'
+                parent_task__isnull=False, status='active'
             ).values_list('parent_task_id', flat=True).distinct()).distinct()
             serializer = self.get_serializer(queryset, many=True)
             formatted_response = []

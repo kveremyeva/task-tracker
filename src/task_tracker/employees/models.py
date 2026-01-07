@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Employee(models.Model):
     """ Модель сотрудников"""
     first_name = models.CharField(max_length=150, verbose_name='Имя')
@@ -14,7 +15,6 @@ class Employee(models.Model):
         if self.middle_name:
             parts.append(self.middle_name)
         return " ".join(parts)
-
 
     def __str__(self):
         return f"{self.full_name} - {self.position}"
